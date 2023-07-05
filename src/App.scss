@@ -1,0 +1,30 @@
+
+#root{
+    height: 100%;
+    width: 100%;
+    #container{
+        height: 100%;
+        width: 100%;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        #container-resultat{
+            height: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: row;
+            #BlocDisplay{
+                height: 75%;
+                width: 25%;
+            }
+            #container-form-missing-info{
+                height: 75%;
+                width: 25%;
+            }
+        }
+    }
+}
