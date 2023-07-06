@@ -70,6 +70,7 @@ function App() {
 
 	return (
 		<div id="container">
+			<div className="header">Perfect matching test</div>
 			<PromptBar setMyPrompt={setMyPrompt} />
 			<div id="container-resultat">
 				{myPrompt !== "" && dataReponse.salespack.name !== "" && <DisplayResponse data={dataReponse} />}
