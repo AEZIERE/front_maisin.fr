@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./FormMissingInfo.scss";
 import { useAppDispatch, useAppSelector } from "../../hook";
 
@@ -7,41 +7,42 @@ interface Props {
 }
 
 const FormMissingInfo: React.FC<Props> = ({ type }) => {
-	const refBloc = React.useRef<HTMLDivElement>(null);
-	const refButton = React.useRef<HTMLButtonElement>(null);
+	const refBloc = useRef<HTMLDivElement>(null);
+	const refButton = useRef<HTMLButtonElement>(null);
 
 	const dataReponse = useAppSelector((state) => state.dataResponse);
 	const dispatch = useAppDispatch();
 
 	const [list, setList] = useState<string[]>([]);
-
-	const list_material = ["PVC", "Bois", "Alu", "Acier"];
-	const list_room = ["Salon", "Chambre", "Cuisine", "Salle de bain"];
-	const list_worktype = ["Installation", "Remplacement"];
-	const [selectedValues, setSelectedValues] = useState<string>("");
+	const [selectedValues, setSelectedValues] = useState<string[]>([]);
 	const [otherValue, setOtherValue] = useState<string>("");
 
-	const handleCheckboxChange = (event: { target: { value: any; checked: any } }) => {
+	const list_material = ["PVC", "Bois", "Metal/Alu"];
+	const list_room = ["Salon", "Chambre", "Cuisine", "Salle de bain"];
+	const list_worktype = ["Installation", "Remplacement"];
+
+	const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		const isChecked = event.target.checked;
 
 		if (isChecked) {
 			setOtherValue("");
-			setSelectedValues(value);
+			setSelectedValues([value]);
 		} else {
-			setSelectedValues("");
+			setSelectedValues([]);
 		}
 	};
-	const handleOtherChange = (event: { target: { value: any; checked: any } }) => {
+
+	const handleOtherChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
-		setSelectedValues(value);
+		setSelectedValues([value]);
 		setOtherValue(value);
 	};
 
 	const handleSubmit = () => {
-		console.log(selectedValues);
+		if (selectedValues.length === 0) return;
 		const data = { ...dataReponse };
-		data[type] = selectedValues;
+		data[type] = { name: selectedValues[0], score: 100 };
 		dispatch({
 			type: "dataResponse/setData",
 			payload: data,
@@ -49,7 +50,7 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 	};
 
 	useEffect(() => {
-		if (type !== null) {
+		if (type !== "") {
 			const bloc = refBloc.current;
 			if (bloc) {
 				bloc.style.display = "flex";
@@ -58,7 +59,6 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 	}, [type]);
 
 	useEffect(() => {
-		if (type.length === 0) return;
 		let list: string[] = [];
 		switch (type) {
 			case "material":
@@ -80,34 +80,42 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 		const button = refButton.current;
 
 		if (button) {
-			if (selectedValues != "") {
-				button.classList.remove("buttonData");
-				button.classList.add("buttonData--ready");
-			} else {
-				button.classList.remove("buttonData--ready");
-				button.classList.add("buttonData");
-			}
+			const buttonClass = "buttonData";
+			const buttonReadyClass = "buttonData--ready";
+
+			button.classList.toggle(buttonReadyClass, selectedValues.length > 0);
+			button.classList.toggle(buttonClass, selectedValues.length === 0);
 		}
 	}, [selectedValues]);
 
 	return (
-		<div id="container-form-missing-info" ref={refBloc}>
-			<div className="top-bloc">
-				{list.map((item: string, index) => (
-					<div key={index}>
-						<input type="checkbox" value={item} checked={selectedValues.includes(item)} onChange={handleCheckboxChange} />
-						<label htmlFor="">{item}</label>
+		<>
+			<div className="bloc">
+				<span>Nous avons besoin de plus d"information sur le type de material pour vos travaux ? </span>
+
+				<div className="container-checks">
+					<span>Réponse:</span>
+					{list.map((item: string, index) => (
+						<div key={index}>
+							<input
+								type="checkbox"
+								value={item}
+								checked={selectedValues.includes(item)}
+								onChange={handleCheckboxChange}
+							/>
+							<label htmlFor="">{item}</label>
+						</div>
+					))}
+					<div className="other-solution">
+						<label htmlFor="">Autre:</label>
+						<input type="text" placeholder="Autre option" onChange={handleOtherChange} value={otherValue} />
 					</div>
-				))}
+				</div>
+				<button id="ValideData" ref={refButton} className="buttonData" type="submit" onClick={handleSubmit}>
+					Confirmer votre choix
+				</button>
 			</div>
-			<div className="bottom-bloc">
-				<label htmlFor="">Autre : </label>
-				<input type="text" placeholder="" onChange={handleOtherChange} value={otherValue} />
-			</div>
-			<button id="ValideData" ref={refButton} className="buttonData" type="submit" onClick={handleSubmit}>
-				Confirmer
-			</button>
-		</div>
+		</>
 	);
 };
 

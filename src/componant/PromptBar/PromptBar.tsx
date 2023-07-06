@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./PromptBar.scss";
+import { useAppDispatch } from "../../hook";
 
 interface Props {
-	setPrompt: React.Dispatch<React.SetStateAction<string>>;
+	setMyPrompt: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const PromptBar: React.FC<Props> = ({ setPrompt }) => {
+const PromptBar: React.FC<Props> = ({ setMyPrompt }) => {
+	const dispatch = useAppDispatch();
+
 	const [valueInput, setValueInput] = useState("");
 	const startButtonRef = useRef<HTMLButtonElement>(null);
 	const clearButtonRef = useRef<HTMLButtonElement>(null);
@@ -15,11 +18,21 @@ const PromptBar: React.FC<Props> = ({ setPrompt }) => {
 	};
 
 	const handlePromptSubmit = () => {
-		setPrompt(valueInput);
+		setMyPrompt(valueInput);
 	};
 
 	const handlePromptClear = () => {
-		setPrompt("");
+		dispatch({
+			type: "dataResponse/setData",
+			payload: {
+				salespack: "",
+				category: "",
+				material: "",
+				room: null,
+				worktype: null,
+			},
+		});
+		setMyPrompt("");
 		setValueInput("");
 	};
 
@@ -28,19 +41,17 @@ const PromptBar: React.FC<Props> = ({ setPrompt }) => {
 		const clearButton = clearButtonRef.current;
 
 		if (startButton && clearButton) {
-			if (valueInput !== "") {
-				startButton.classList.remove("processing-results");
-				startButton.classList.add("processing-results--ready");
+			const processingClass = "processing-results";
+			const processingReadyClass = "processing-results--ready";
+			const clearClass = "clear-results";
+			const clearReadyClass = "clear-results--ready";
 
-				clearButton.classList.remove("clear-results");
-				clearButton.classList.add("clear-results--ready");
-			} else {
-				startButton.classList.remove("processing-results--ready");
-				startButton.classList.add("processing-results");
+			startButton.classList.toggle(processingReadyClass, valueInput !== "");
+			startButton.classList.toggle(processingClass, valueInput === "");
+			startButton.disabled = valueInput === "";
 
-				clearButton.classList.remove("clear-results--ready");
-				clearButton.classList.add("clear-results");
-			}
+			clearButton.classList.toggle(clearReadyClass, valueInput !== "");
+			clearButton.classList.toggle(clearClass, valueInput === "");
 		}
 	}, [valueInput]);
 
@@ -54,14 +65,20 @@ const PromptBar: React.FC<Props> = ({ setPrompt }) => {
 						className="input"
 						placeholder="search..."
 						value={valueInput}
-						onChange={(e) => handlePromptChange(e)}
+						onChange={handlePromptChange}
 					/>
 					<button id="clear" ref={clearButtonRef} className="clear-results" type="button" onClick={handlePromptClear}>
 						Clear
 					</button>
 				</div>
-				<button id="start" ref={startButtonRef} className="processing-results" type="button" onClick={handlePromptSubmit}>
-					Processing
+				<button
+					id="start"
+					ref={startButtonRef}
+					className="processing-results"
+					type="button"
+					onClick={handlePromptSubmit}
+				>
+					Faire la demande
 				</button>
 			</div>
 		</div>

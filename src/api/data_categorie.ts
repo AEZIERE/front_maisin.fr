@@ -1,26 +1,19 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 
-
-export const useAxiosApi= () => {
+export const useAxiosApi = () => {
 	return axios.create({
-		baseURL: import.meta.env.VITE_API_COMMUNE,
+		baseURL: "base de url, ce qui est commun a tout les requete",
 		responseType: "json",
 	});
 };
 
-export const useGetDataScolaire = ({
-    prompte,
-	isEnable = true,
-}: {
-	prompte: string;
-	isEnable: boolean;
-}) => {
+export const useGetResponse = ({ prompte, isEnable = true }: { prompte: string; isEnable: boolean }) => {
 	const api = useAxiosApi();
 	return useQuery<[]>(
-		["useGetDataScolaire", prompte],
+		["useGetResponse", prompte],
 		async () => {
-			const { data } = await api.get(`data/scolaire/all?code=${prompte}`);
+			const { data } = await api.get(`/blab/labla/blabla/${prompte}`);
 			return data;
 		},
 		{ enabled: isEnable }
