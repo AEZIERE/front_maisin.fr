@@ -21,6 +21,8 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 	const list_room = ["Salon", "Chambre", "Cuisine", "Salle de bain"];
 	const list_worktype = ["Installation", "Remplacement"];
 
+	const [sentence, setSentence] = useState<string>("");
+
 	const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		const isChecked = event.target.checked;
@@ -88,10 +90,20 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 		}
 	}, [selectedValues]);
 
+	useEffect(() => {
+		if (type === "material") {
+			setSentence("Quel type de material souhaitez-vous ?");
+		} else if (type === "worktype") {
+			setSentence("Quel type de travaux souhaitez-vous réaliser ?");
+		} else if (type === "room") {
+			setSentence("Dans quelle pièce souhaitez-vous réaliser vos travaux ?");
+		}
+	}, [otherValue]);
+
 	return (
 		<>
 			<div className="bloc">
-				<span>Nous avons besoin de plus d"information sur le type de material pour vos travaux ? </span>
+				<span>{sentence}</span>
 
 				<div className="container-checks">
 					<span>Réponse:</span>
