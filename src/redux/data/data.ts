@@ -4,6 +4,7 @@ export type DataResponse = {
 	salespack: {
 		name: string;
 		score: number | null;
+		is_implemented: boolean;
 	};
 	category: {
 		name: string;
@@ -33,6 +34,7 @@ export interface Data {
 	salespack: {
 		name: string;
 		score: number | null;
+		is_implemented: boolean;
 	};
 	category: {
 		name: string;
@@ -62,6 +64,7 @@ const initialState: Data = {
 	salespack: {
 		name: "",
 		score: 0.0,
+		is_implemented: false,
 	},
 	category: {
 		name: "",
@@ -79,6 +82,10 @@ const initialState: Data = {
 		name: "",
 		score: 0.0,
 	},
+	tag: {
+		name: "",
+		value: false,
+	},
 };
 
 export const dataResponseSlider = createSlice({
@@ -93,6 +100,7 @@ export const dataResponseSlider = createSlice({
 			state.material = action.payload.material;
 			state.room = action.payload.room;
 			state.worktype = action.payload.worktype;
+			state.tag = action.payload.tag;
 		},
 	},
 });

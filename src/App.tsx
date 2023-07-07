@@ -15,29 +15,20 @@ function App() {
 	const dispatch = useAppDispatch();
 	const refBloc = useRef<HTMLDivElement>(null);
 
-	//const { data } = useGetResponse({ prompte: myPrompt, isEnable: myPrompt !== "" });
+	const { data } = useGetResponse({ prompt: myPrompt, isEnable: myPrompt !== "" });
 
 	useEffect(() => {
-		// if (!data) {
-		// 	//remplacer les valeurs par les valeurs de l'api (data)
-		// 	dispatch({
-		// 		type: "dataResponse/setData",
-		// 		payload: data,
-		// 	});
-		// }
-		//remplacer les valeurs par les valeurs de l'api (data)
-		dispatch({
-			type: "dataResponse/setData",
-			payload: {
-				salespack: { name: "Fenetre", score: 0.0 },
-				category: { name: "Fenetre", score: 0.0 },
-				material: { name: "Missing Info", score: 0.0 },
-				room: { name: null, score: 0.0 },
-				worktype: { name: null, score: 0.0 },
-				tag: { name: "de toit", value: true },
-			},
-		});
-	}, []);
+		console.log(data);
+		if (data) {
+			//remplacer les valeurs par les valeurs de l'api (data)
+			dispatch({
+				type: "dataResponse/setData",
+				payload: data,
+			});
+			console.log(dataReponse);
+			
+		}
+	}, [data]);
 
 	useEffect(() => {
 		console.log(myPrompt);
@@ -48,7 +39,7 @@ function App() {
 		const keys = Object.keys(dataReponse);
 
 		if (myPrompt !== "") {
-			const params = keys.filter((key) => dataReponse[key].name === "Missing Info");
+			const params = keys.filter((key) => dataReponse[key]?.name === "Missing info");
 
 			setParamsMissingInfo(params);
 		}
