@@ -68,6 +68,11 @@ const DisplayResponse: React.FC<Props> = ({ data }) => {
                             worktype : {data.worktype.name} ( {data.worktype.score} )
                         </span>
                     )}
+                    {data.tag.name && (
+                        <span>
+                            worktype : {data.tag.name} ( {data.tag.value?"True":"False"} )
+                        </span>
+                    )}
                 </>
             )}
 		</div>
