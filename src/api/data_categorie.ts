@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const useAxiosApi = () => {
 	return axios.create({
-		baseURL: "base de url, ce qui est commun a tout les requete",
+		baseURL: "https://localhost:8001/",
 		responseType: "json",
 	});
 };
@@ -13,7 +13,7 @@ export const useGetResponse = ({ prompte, isEnable = true }: { prompte: string; 
 	return useQuery<[]>(
 		["useGetResponse", prompte],
 		async () => {
-			const { data } = await api.get(`/blab/labla/blabla/${prompte}`);
+			const { data } = await api.get(`?prompt=${prompte}`);
 			return data;
 		},
 		{ enabled: isEnable }

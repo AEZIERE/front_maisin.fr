@@ -22,24 +22,19 @@ function App() {
 		// 	//remplacer les valeurs par les valeurs de l'api (data)
 		// 	dispatch({
 		// 		type: "dataResponse/setData",
-		// 		payload: {
-		// 			salespack: { name: "salespack", score: 0.0 },
-		// 			category: { name: "salespack", score: 0.0 },
-		// 			material: { name: "Missing Info", score: 0.0 },
-		// 			room: { name: "Missing Info", score: 0.0 },
-		// 			worktype: { name: null, score: 0.0 },
-		// 		},
+		// 		payload: data,
 		// 	});
 		// }
 		//remplacer les valeurs par les valeurs de l'api (data)
 		dispatch({
 			type: "dataResponse/setData",
 			payload: {
-				salespack: { name: "salespack", score: 0.0 },
-				category: { name: "salespack", score: 0.0 },
+				salespack: { name: "Fenetre", score: 0.0 },
+				category: { name: "Fenetre", score: 0.0 },
 				material: { name: "Missing Info", score: 0.0 },
-				room: { name: "Missing Info", score: 0.0 },
+				room: { name: null, score: 0.0 },
 				worktype: { name: null, score: 0.0 },
+				tag: { name: "de toit", value: true },
 			},
 		});
 	}, []);
@@ -65,18 +60,31 @@ function App() {
 			if (bloc) {
 				bloc.style.display = "flex";
 			}
+		} else {
+			const bloc = refBloc.current;
+			if (bloc) {
+				bloc.style.display = "none";
+			}
 		}
 	}, [paramsMissingInfo]);
 
 	return (
 		<div id="container">
 			<div className="header">Perfect matching test</div>
-			<PromptBar setMyPrompt={setMyPrompt} />
-			<div id="container-resultat">
-				{myPrompt !== "" && dataReponse.salespack.name !== "" && <DisplayResponse data={dataReponse} />}
-				<div id="container-form-missing-info" ref={refBloc}>
-					{paramsMissingInfo.length > 0 &&
-						paramsMissingInfo.map((param: string) => <FormMissingInfo key={param} type={param} />)}
+			<div className="container-action">
+				<div className="content-left">
+					{myPrompt !== "" && dataReponse.salespack.name !== "" && <DisplayResponse data={dataReponse} />}
+				</div>
+				<div className="content-right">
+					<PromptBar setMyPrompt={setMyPrompt} />
+					<div id="container-resultat">
+						<div id="container-form-missing-info" ref={refBloc}>
+							{paramsMissingInfo.length > 0 &&
+								paramsMissingInfo.map((param: string) =>
+									paramsMissingInfo.indexOf(param) == 0 ? <FormMissingInfo key={param} type={param} /> : null
+								)}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

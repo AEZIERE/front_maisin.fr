@@ -92,7 +92,7 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 
 	useEffect(() => {
 		if (type === "material") {
-			setSentence("Quel type de material souhaitez-vous ?");
+			setSentence(`Avez-vous une préférence en terme de matériau pour votre ${dataReponse.category.name} ?`);
 		} else if (type === "worktype") {
 			setSentence("Quel type de travaux souhaitez-vous réaliser ?");
 		} else if (type === "room") {
@@ -106,7 +106,6 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 				<span>{sentence}</span>
 
 				<div className="container-checks">
-					<span>Réponse:</span>
 					{list.map((item: string, index) => (
 						<div key={index}>
 							<input

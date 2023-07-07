@@ -21,21 +21,6 @@ const PromptBar: React.FC<Props> = ({ setMyPrompt }) => {
 		setMyPrompt(valueInput);
 	};
 
-	const handlePromptClear = () => {
-		dispatch({
-			type: "dataResponse/setData",
-			payload: {
-				salespack: "",
-				category: "",
-				material: "",
-				room: null,
-				worktype: null,
-			},
-		});
-		setMyPrompt("");
-		setValueInput("");
-	};
-
 	useEffect(() => {
 		const startButton = startButtonRef.current;
 		const clearButton = clearButtonRef.current;
@@ -67,19 +52,16 @@ const PromptBar: React.FC<Props> = ({ setMyPrompt }) => {
 						value={valueInput}
 						onChange={handlePromptChange}
 					/>
-					<button id="clear" ref={clearButtonRef} className="clear-results" type="button" onClick={handlePromptClear}>
-						Clear
+					<button
+						id="start"
+						ref={startButtonRef}
+						className="processing-results"
+						type="button"
+						onClick={handlePromptSubmit}
+					>
+						Envoyer
 					</button>
 				</div>
-				<button
-					id="start"
-					ref={startButtonRef}
-					className="processing-results"
-					type="button"
-					onClick={handlePromptSubmit}
-				>
-					Faire la demande
-				</button>
 			</div>
 		</div>
 	);

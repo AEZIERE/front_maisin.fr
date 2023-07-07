@@ -11,7 +11,7 @@
 		flex-direction: column;
 		align-items: center;
 		div {
-			width: 60%;
+			width: 70%;
 			height: 60px;
 			padding: 5px;
 			border: #b2b2b2 1px solid;
@@ -33,28 +33,24 @@
 				}
 			}
 
-			#clear {
-				width: 10%;
+			button#start {
+				width: 20%;
 				height: 50px;
-				margin: 0 10px;
 				border: none;
-				border-radius: 30px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				&:focus {
-					outline: none;
-					background-color: white !important;
-				}
+				color: white;
+				font-size: 1.3em;
+				margin-top: 20px;
+				margin-bottom: 20px;
+				border-radius: 10px;
 			}
-			button.clear-results {
-				background-color: #61c86b;
+			button.processing-results {
+				background-color: #57ab5f;
 				cursor: pointer;
 				transform: scale(0.9);
-				transition: 1s;
+				transition: 1.3s;
 
 				&:disabled {
-					background-color: #7ef88a;
+					background-color: #00b6797a;
 					cursor: not-allowed;
 					transform: scale(1);
 					transition: 0.8s;
@@ -66,52 +62,15 @@
 					transition: 2s;
 				}
 				&--ready:hover {
-					transform: scale(1.1);
+					background-color: #306135;
+					transform: scale(1.05);
 					transition: 0.7s;
 				}
 				&--ready:active {
-					background-color: #35693a;
+					background-color: #4d9a55;
 					transform: scale(0.9);
 					transition: 0.1s;
 				}
-			}
-		}
-		button#start {
-			width: 20%;
-			height: 50px;
-			border: none;
-			color: white;
-			font-size: 1.3em;
-			margin-top: 20px;
-			margin-bottom: 20px;
-		}
-		button.processing-results {
-			background-color: #57ab5f;
-			cursor: pointer;
-			transform: scale(0.9);
-			transition: 1.3s;
-
-			&:disabled {
-				background-color: #d2ffcd;
-				cursor: not-allowed;
-				transform: scale(1);
-				transition: 0.8s;
-			}
-			&--ready {
-				background-color: #43884a;
-				outline: none;
-				transform: scale(1);
-				transition: 2s;
-			}
-			&--ready:hover {
-				background-color: #306135;
-				transform: scale(1.05);
-				transition: 0.7s;
-			}
-			&--ready:active {
-				background-color: #4d9a55;
-				transform: scale(0.9);
-				transition: 0.1s;
 			}
 		}
 	}

@@ -21,6 +21,10 @@ export type DataResponse = {
 		name: string;
 		score: number | null;
 	};
+	tag: {
+		name: string | null;
+		value: boolean | null;
+	};
 	[key: string]: string | null | Object;
 };
 
@@ -45,6 +49,10 @@ export interface Data {
 	worktype: {
 		name: string;
 		score: number | null;
+	};
+	tag: {
+		name: string | null;
+		value: boolean | null;
 	};
 	[key: string]: string | null | Object;
 }
