@@ -45,32 +45,32 @@ const DisplayResponse: React.FC<Props> = ({ data }) => {
 	}, [data]);
 	return (
 		<div id="BlocDisplay" ref={refBloc}>
-			<h2>Resultat du modèle</h2>
+			<h2>Résultats du modèle</h2>
 			<span>
-				salespack : {data.salespack.name} ( {data.salespack.score} )
+				<b>Salespack : </b> {data.salespack.name} ( {data.salespack.score} )
 				{data.salespack?.is_implemented ? "(is implemented)" : "(is not implemented)"}
 			</span>
 			{data.salespack?.is_implemented && (
                 <>
                     <span>
-                        category : {data?.category?.name} ( {data?.category?.score} )
+						<b>Category :</b> {data?.category?.name} ( {data?.category?.score} )
                     </span>
                     <span>
-                        material : {data?.material.name} ( {data.material.score} )
+                        <b>Material :</b> {data?.material.name} ( {data.material.score} )
                     </span>
                     {data.room.name && (
                         <span>
-                            room : {data.room.name} ( {data.room.score} )
+                            <b>Room :</b> {data.room.name} ( {data.room.score} )
                         </span>
                     )}
                     {data.worktype.name && (
                         <span>
-                            worktype : {data.worktype.name} ( {data.worktype.score} )
+                            <b>Worktype :</b>{data.worktype.name} ( {data.worktype.score} )
                         </span>
                     )}
                     {data.tag.name && (
                         <span>
-                            worktype : {data.tag.name} ( {data.tag.value?"True":"False"} )
+                            <b>Tag :</b>{data.tag.name} ( {data.tag.value?"True":"False"} )
                         </span>
                     )}
                 </>

@@ -98,7 +98,7 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 		} else if (type === "room") {
 			setSentence("Dans quelle pièce souhaitez-vous réaliser vos travaux ?");
 		}
-	}, [otherValue]);
+	}, [otherValue, dataReponse]);
 
 	return (
 		<>
@@ -123,7 +123,7 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 					</div>
 				</div>
 				<button id="ValideData" ref={refButton} className="buttonData" type="submit" onClick={handleSubmit}>
-					Confirmer votre choix
+					Confirmer mon choix
 				</button>
 			</div>
 		</>

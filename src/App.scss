@@ -18,7 +18,10 @@
 			justify-content: center;
 			align-items: center;
 			font-size: 4em;
-			box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+			box-shadow: 0px 0px 10px 0px rgba(25, 66, 25, 0.75);
+			b {
+				color: #43884a;
+			}
 		}
 		.container-action {
 			display: flex;

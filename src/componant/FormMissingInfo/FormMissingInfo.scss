@@ -44,15 +44,16 @@
 		}
 	}
 	button#ValideData {
-		background-color: #57ab5f;
+		background-color: #43884a;
 		cursor: pointer;
 		transform: scale(0.9);
 		transition: 1.3s;
-		width: 35%;
-		height: 30px;
+		width: 200px;
+		height: 40px;
 		border: none;
 		color: white;
-		font-size: 0.8em;
+		font-size: 1em;
+		border-radius: 10px;
 
 		&:disabled {
 			background-color: #d2ffcd;

@@ -44,7 +44,7 @@
 				border-radius: 10px;
 			}
 			button.processing-results {
-				background-color: #57ab5f;
+				background-color: #43884a;
 				cursor: pointer;
 				transform: scale(0.9);
 				transition: 1.3s;
@@ -61,10 +61,10 @@
 					transform: scale(1);
 					transition: 2s;
 				}
-				&--ready:hover {
-					background-color: #306135;
-					transform: scale(1.05);
-					transition: 0.7s;
+				&:hover {
+					background-color: #6cc575;
+					transform: scale(1.01);
+					transition: 0.5s;
 				}
 				&--ready:active {
 					background-color: #4d9a55;
