@@ -48,7 +48,7 @@ const PromptBar: React.FC<Props> = ({ setMyPrompt }) => {
 						id="search"
 						type="text"
 						className="input"
-						placeholder="search..."
+						placeholder="Décrivez votre projet..."
 						value={valueInput}
 						onChange={handlePromptChange}
 					/>

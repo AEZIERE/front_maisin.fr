@@ -78,6 +78,7 @@ function App() {
 					</div>
 				</div>
 			</div>
+			<span>*Implemented salespacks status : Chauffage Chaudiere Chauffe-eau | Portail | Fenêtre | Veranda-Pergola| Facade Bardage | Jardin-Espaces Verts | Energies renouvelables | Nuisible | Isolation | Climatisation</span>
 		</div>
 	);
 }

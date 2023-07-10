@@ -44,7 +44,7 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 	const handleSubmit = () => {
 		if (selectedValues.length === 0) return;
 		const data = { ...dataReponse };
-		data[type] = { name: selectedValues[0], score: 100 };
+		data[type] = { name: selectedValues[0], score: 1.0 };
 		dispatch({
 			type: "dataResponse/setData",
 			payload: data,
