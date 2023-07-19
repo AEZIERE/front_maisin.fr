@@ -92,7 +92,7 @@ const FormMissingInfo: React.FC<Props> = ({ type }) => {
 
 	useEffect(() => {
 		if (type === "material") {
-			setSentence(`Avez-vous une préférence en terme de matériau pour votre ${dataReponse.category.name} ?`);
+			setSentence(`Avez-vous une préférence en terme de matériau pour votre ${dataReponse.category?.name} ?`);
 		} else if (type === "worktype") {
 			setSentence("Quel type de travaux souhaitez-vous réaliser ?");
 		} else if (type === "room") {

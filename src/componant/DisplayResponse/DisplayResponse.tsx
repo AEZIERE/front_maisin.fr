@@ -6,29 +6,28 @@ interface Props {
 		salespack: {
 			name: string;
 			score: number | null;
-			is_implemented: boolean;
+			is_implemented?: boolean;
 		};
-		category: {
+		category?: {
 			name: string;
 			score: number | null;
 		};
-		material: {
+		material?: {
 			name: string;
 			score: number | null;
 		};
-		room: {
+		room?: {
 			name: string;
 			score: number | null;
 		};
-		worktype: {
+		worktype?: {
 			name: string;
 			score: number | null;
 		};
-		tag: {
+		tag?: {
 			name: string;
 			value: boolean | null;
 		};
-		[key: string]: string | null | Object;
 	};
 }
 
@@ -48,33 +47,28 @@ const DisplayResponse: React.FC<Props> = ({ data }) => {
 			<h2>Résultats du modèle</h2>
 			<span>
 				<b>Salespack : </b> {data.salespack.name} ( {data.salespack.score} )
-				{data.salespack?.is_implemented ? "(is implemented)" : "(is not implemented)"}
 			</span>
-			{data.salespack?.is_implemented && (
-                <>
                     <span>
-						<b>Category :</b> {data?.category?.name} ( {data?.category?.score} )
+						<b>Category :</b> {data.category?.name} ( {data.category?.score} )
                     </span>
                     <span>
-                        <b>Material :</b> {data?.material.name} ( {data.material.score} )
+                        <b>Material :</b> {data.material?.name} ( {data.material?.score} )
                     </span>
-                    {data.room.name && (
+                    {data.room?.name && (
                         <span>
                             <b>Room :</b> {data.room.name} ( {data.room.score} )
                         </span>
                     )}
-                    {data.worktype.name && (
+                    {data.worktype?.name && (
                         <span>
                             <b>Worktype :</b>{data.worktype.name} ( {data.worktype.score} )
                         </span>
                     )}
-                    {data.tag.name && (
+                    {data.tag?.name && (
                         <span>
                             <b>Tag :</b>{data.tag.name} ( {data.tag.value?"True":"False"} )
                         </span>
                     )}
-                </>
-            )}
 		</div>
 	);
 };
